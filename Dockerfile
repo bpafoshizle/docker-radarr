@@ -1,23 +1,32 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.17
+FROM ghcr.io/linuxserver/baseimage-ubuntu:arm64v8-jammy
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 ARG RADARR_RELEASE
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
+LABEL maintainer="bpafoshizle"
 
-# environment settings
-ARG RADARR_BRANCH="master"
+# set environment variabls
+ARG DEBIAN_FRONTEND="noninteractive"
 ENV XDG_CONFIG_HOME="/config/xdg"
+ARG RADARR_BRANCH="master"
 
 RUN \
+ echo "**** add mediaarea repository ****" && \
+  curl -L \
+    "https://mediaarea.net/repo/deb/repo-mediaarea_1.0-21_all.deb" \
+    -o /tmp/key.deb && \
+  dpkg -i /tmp/key.deb && \
+  echo "deb https://mediaarea.net/repo/deb/ubuntu jammy main" | tee /etc/apt/sources.list.d/mediaarea.list && \
   echo "**** install packages ****" && \
-  apk add -U --upgrade --no-cache \
-    icu-libs \
-    sqlite-libs && \
+  apt-get update && \
+  apt-get install -y --no-install-recommends \
+    libsqlite3-0 \
+    libicu70 \
+    mediainfo && \    
   echo "**** install radarr ****" && \
   mkdir -p /app/radarr/bin && \
   if [ -z ${RADARR_RELEASE+x} ]; then \
@@ -26,15 +35,18 @@ RUN \
   fi && \
   curl -o \
     /tmp/radarr.tar.gz -L \
-    "https://radarr.servarr.com/v1/update/${RADARR_BRANCH}/updatefile?version=${RADARR_RELEASE}&os=linuxmusl&runtime=netcore&arch=x64" && \
+    "https://radarr.servarr.com/v1/update/${RADARR_BRANCH}/updatefile?version=${RADARR_RELEASE}&os=linuxmusl&runtime=netcore&arch=arm64" && \
   tar xzf \
     /tmp/radarr.tar.gz -C \
     /app/radarr/bin --strip-components=1 && \
   echo -e "UpdateMethod=docker\nBranch=${RADARR_BRANCH}\nPackageVersion=${VERSION}\nPackageAuthor=[linuxserver.io](https://linuxserver.io)" > /app/radarr/package_info && \
   echo "**** cleanup ****" && \
+  apt-get clean && \
   rm -rf \
     /app/radarr/bin/Radarr.Update \
-    /tmp/*
+    /tmp/* \
+    /var/lib/apt/lists/* \
+    /var/tmp/*
 
 # copy local files
 COPY root/ /
