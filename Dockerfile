@@ -22,7 +22,7 @@ RUN \
   dpkg -i /tmp/key.deb && \
   echo "deb https://mediaarea.net/repo/deb/ubuntu jammy main" | tee /etc/apt/sources.list.d/mediaarea.list && \
   echo "**** install packages ****" && \
-  sudo dpkg --add-architecture arm64 && \
+  dpkg --add-architecture arm64 && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
     libsqlite3-0 \
