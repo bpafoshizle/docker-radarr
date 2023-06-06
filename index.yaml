@@ -3,12 +3,12 @@ entries:
   radarr:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-06-05T21:06:10.278312-05:00"
+    created: "2023-06-05T21:17:58.385361-05:00"
     description: Radarr - Automatic downloader for movies :)
-    digest: 894db1a32c7afd5ba56dae3cc2ae8a8b946a5928beb97e66d1815f7c4838149b
+    digest: a9bf21e0bd748a9e0c239a29b1188389c9233c93c785c21e33b4ece60fb5cdf6
     icon: https://bpafoshizle.github.io/docker-radarr/charts/radarr/logo/radarr.png
     name: radarr
     urls:
     - https://bpafoshizle.github.io/docker-radarr/radarr-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-05T21:06:10.275486-05:00"
+generated: "2023-06-05T21:17:58.384104-05:00"
