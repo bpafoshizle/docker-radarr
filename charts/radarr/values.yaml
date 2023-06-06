@@ -1,0 +1,60 @@
+
+replicaCount: 1
+
+image:
+  repository: linuxserver/radarr
+  tag: latest
+  pullPolicy: IfNotPresent
+
+env:
+  - name: PUID
+    value: "1000"
+  - name: PGID
+    value: "1000"
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - radarr.bananaspliff.org
+  tls:
+   - secretName: radarr-bananaspliff-org
+     hosts:
+       - radarr.bananaspliff.org
+
+volumes:
+  - name: myvolume
+    persistentVolumeClaim:
+      claimName: myvolume
+
+volumeMounts:
+  - name: myvolume
+    mountPath: "/config"
+    subPath: "configs/radarr"
+  - name: myvolume
+    mountPath: "/downloads/transmission"
+    subPath: "downloads/transmission"
+  - name: myvolume
+    mountPath: "/movies"
+    subPath: "medias/movies"
+
+resources:
+  requests:
+    memory: 128Mi
+    cpu: 0.1
+  limits:
+    memory: 256Mi
+    cpu: 0.5
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
