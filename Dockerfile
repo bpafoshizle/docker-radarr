@@ -29,8 +29,7 @@ RUN \
     libicu70 \
     mediainfo \
     musl:arm64 \
-    libstdc++6-10-dbg:arm64 \
-    libgcc1-dbg:arm64 && \    
+    libstdc++6-arm64-cross && \    
   echo "**** install radarr ****" && \
   mkdir -p /app/radarr/bin && \
   if [ -z ${RADARR_RELEASE+x} ]; then \
