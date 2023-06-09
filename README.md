@@ -267,3 +267,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 * **17.04.17:** - Switch to using inhouse mono baseimage, adds python also.
 * **13.04.17:** - Switch to official mono repository.
 * **10.01.17:** - Initial Release.
+
+
+Error loading shared library libstdc++.so.6: No such file or directory (needed by /app/radarr/bin/Radarr)
+Error loading shared library libgcc_s.so.1: No such file or directory (needed by /app/radarr/bin/Radarr)

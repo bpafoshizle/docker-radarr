@@ -28,7 +28,9 @@ RUN \
     libsqlite3-0 \
     libicu70 \
     mediainfo \
-    musl:arm64 && \    
+    musl:arm64 \
+    libstdc++6 \
+    libgcc1 && \    
   echo "**** install radarr ****" && \
   mkdir -p /app/radarr/bin && \
   if [ -z ${RADARR_RELEASE+x} ]; then \
