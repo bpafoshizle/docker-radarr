@@ -271,6 +271,13 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 https://www.opcito.com/blogs/creating-helm-repository-using-github-pages
 
+When updating the kube deployment or helm stuff don't forget to do the following to update it before pushing to git:
+
+```
+helm package charts/radarr
+helm repo index --url https://bpafoshizle.github.io/docker-radarr .
+```
+
 
 Error loading shared library libstdc++.so.6: No such file or directory (needed by /app/radarr/bin/Radarr)
 Error loading shared library libgcc_s.so.1: No such file or directory (needed by /app/radarr/bin/Radarr)
