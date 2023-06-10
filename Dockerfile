@@ -28,17 +28,40 @@ RUN \
     libsqlite3-0 \
     libicu70 \
     mediainfo \
-    musl:arm64 \
-    libstdc++6-arm64-cross && \    
+    ca-certificates-mono \
+    libmono-system-net-http4.0-cil \
+    libmono-corlib4.5-cil \
+    libmono-microsoft-csharp4.0-cil \
+    libmono-posix4.0-cil \
+    libmono-system-componentmodel-dataannotations4.0-cil \
+    libmono-system-configuration-install4.0-cil \
+    libmono-system-configuration4.0-cil \
+    libmono-system-core4.0-cil \
+    libmono-system-data-datasetextensions4.0-cil \
+    libmono-system-data4.0-cil \
+    libmono-system-identitymodel4.0-cil \
+    libmono-system-io-compression4.0-cil \
+    libmono-system-numerics4.0-cil \
+    libmono-system-runtime-serialization4.0-cil \
+    libmono-system-security4.0-cil \
+    libmono-system-servicemodel4.0a-cil \
+    libmono-system-serviceprocess4.0-cil \
+    libmono-system-transactions4.0-cil \
+    libmono-system-web4.0-cil \
+    libmono-system-xml-linq4.0-cil \
+    libmono-system-xml4.0-cil \
+    libmono-system4.0-cil \
+    mono-runtime \
+    mono-vbnc && \   
   echo "**** install radarr ****" && \
   mkdir -p /app/radarr/bin && \
   if [ -z ${RADARR_RELEASE+x} ]; then \
-    RADARR_RELEASE=$(curl -sL "https://radarr.servarr.com/v1/update/${RADARR_BRANCH}/changes?runtime=netcore&os=linuxmusl" \
+    RADARR_RELEASE=$(curl -sL "https://radarr.servarr.com/v1/update/${RADARR_BRANCH}/changes" \
     | jq -r '.[0].version'); \
   fi && \
   curl -o \
     /tmp/radarr.tar.gz -L \
-    "https://radarr.servarr.com/v1/update/${RADARR_BRANCH}/updatefile?version=${RADARR_RELEASE}&os=linuxmusl&runtime=netcore&arch=arm64" && \
+    "https://radarr.servarr.com/v1/update/${RADARR_BRANCH}/updatefile?version=${RADARR_RELEASE}&arch=arm64" && \
   tar xzf \
     /tmp/radarr.tar.gz -C \
     /app/radarr/bin --strip-components=1 && \

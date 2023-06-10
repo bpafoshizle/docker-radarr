@@ -269,5 +269,10 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 * **10.01.17:** - Initial Release.
 
 
+https://www.opcito.com/blogs/creating-helm-repository-using-github-pages
+
+
 Error loading shared library libstdc++.so.6: No such file or directory (needed by /app/radarr/bin/Radarr)
 Error loading shared library libgcc_s.so.1: No such file or directory (needed by /app/radarr/bin/Radarr)
+libgcc_s.so.1
+libstdc++.so.6
