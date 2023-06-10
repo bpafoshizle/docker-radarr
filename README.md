@@ -278,8 +278,15 @@ helm package charts/radarr
 helm repo index --url https://bpafoshizle.github.io/docker-radarr .
 ```
 
+Running on Ubuntu jammy base reveived these types of errors, which I was not able to overcome: 
 
+```
 Error loading shared library libstdc++.so.6: No such file or directory (needed by /app/radarr/bin/Radarr)
 Error loading shared library libgcc_s.so.1: No such file or directory (needed by /app/radarr/bin/Radarr)
 libgcc_s.so.1
 libstdc++.so.6
+```
+
+I went back to Alpine base and confirmed the issue is with nip.io and DNS, and this is a general problem with musl based C:
+
+https://bell-sw.com/blog/how-to-deal-with-alpine-dns-issues/
