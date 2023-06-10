@@ -51,3 +51,7 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
+      hostAliases:
+       - ip: 192.168.0.200
+         hostnames:
+         - media.192.168.0.200.nip.io
